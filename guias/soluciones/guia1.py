@@ -114,6 +114,10 @@ def suma_maxima_cruzada(arr, izq, medio, der):
 #######################################
 
 # Ejercicio 11
+# PREGUNTAR
+# La duda es como puedo hcer para que la modificacion que estoy pensando funcione
+# No se como hacer para que retorne k, pero que siga manteniendo el array 
+# sobre el que estoy evaluando.
 def desorden_sort(arr):
     if len(arr) <= 1:
         return arr
