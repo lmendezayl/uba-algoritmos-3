@@ -1,7 +1,7 @@
 def main():
     inp: str = input().split()
     n, l, r = int(inp[0]), int(inp[1]), int(inp[2]) #int int int
-    print((f(n)[l-1:r]))
+    print(f(n))
     
 def f(n, seq=None):
     if seq is None:
@@ -10,7 +10,7 @@ def f(n, seq=None):
         if e == 1 or e == 0:
             return seq
         else:
-            return f(e) + [seq[1]] + f(e)[::-1] 
+            return f(e) + [seq[1]] + f(e)[::-1]
 
 if __name__ == '__main__':
     main()
