@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 
+using namespace std;
 
 vector<int> merge(vector<int>& izq, vector<int>& der){
     vector<int> mergeados;
@@ -17,8 +18,11 @@ vector<int> merge(vector<int>& izq, vector<int>& der){
             j += 1;
         }
     }
-    if (i >= izq.size(
-    mergeados.push_back(
+    // mergeados.extend(...)
+    mergeados.insert(mergeados.end(), izq.begin() + i, izq.end());
+    mergeados.insert(mergeados.end(), der.begin() + j, der.end());
+
+    return mergeados;
 }
 
 vector<int> mergesort(const vector<int>& arr){
@@ -29,13 +33,23 @@ vector<int> mergesort(const vector<int>& arr){
     vector<int> izq(arr.begin(), arr.begin() + medio);
     vector<int> der(arr.begin() + medio, arr.end());
 
-    mitad_izq = mergesort(izq);
-    mitad_der = mergesort(der);
+    vector<int> mitad_izq = mergesort(izq);
+    vector<int> mitad_der = mergesort(der);
 
     return merge(mitad_izq, mitad_der);
 }
 
 // driver
 int main(){
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++){
+        cin >> arr[i];
+    }
+    vector<int> ordenado = mergesort(arr);
+
+    for (int x : ordenado) cout << x << " ";
+    cout << "\n";
     return 0;
 }
