@@ -1,8 +1,11 @@
+import math
+
 def main():
-    inp: str = input().split()
-    n, l, r = int(inp[0]), int(inp[1]), int(inp[2]) #int int int
-    print(f(n))
-    
+    n: int = int(input())
+    l: int = int(input())
+    r: int = int(input())   
+    print(sum(f(n)[l-1:r))
+
 def f(n, seq=None):
     if seq is None:
         seq = [n//2, n%2, n//2]

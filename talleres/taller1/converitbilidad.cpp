@@ -13,33 +13,33 @@ using namespace std;
  * - no pasa el test 7 y tira 58 mb de espacio xd
  *   vamos a NO Hacer copias y vamos a pasar un vector y simplemente modficarlo 
  */
+typedef long long ll;
 
-bool convertibilidad(int x, int y, vector<int>& seq){
+bool convertibilidad(ll x, ll y, vector<ll>& seq){
     if (seq.empty()) seq.push_back(x);
     if (x > y) return false;  // poda 
     if (x == y) return true;
-    
     seq.push_back(x * 2);
-    res = convertibilidad(x * 2, y, seq);
-    if (!res.empty()) return true;
-
-    seq_aux = seq; // clanker de seq pq sino no me deja insertar 
-    seq_aux.insert(10*x + 1);
-    res = convertibilidad(10*x + 1, y, seq_aux);
-    if (!res.empty()) return res;
-    
-    return {}; // :c
+    bool res = convertibilidad(x * 2, y, seq);
+    if (res) return res;
+    seq.pop_back(); 
+    seq.push_back(10*x + 1);
+    res = convertibilidad(10*x + 1, y, seq);
+    if (res) return res;
+    seq.pop_back();
+    return false; // :c
 }
 
 int main(){
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int x, y;
+    ll x, y;
     cin >> x >> y; //cin >> | cout <<
-    vector<int> seq;
-    if (convertibilidad(x, y, ){
-        cout << "YES\n" << res.size() << endl;
-        for(auto elem : res) cout << elem << " ";
+    vector<ll> seq;
+    if (convertibilidad(x, y, seq)){
+        cout << "YES\n" << seq.size() << endl;
+        for(auto elem : seq) cout << elem << " ";
+        cout << "\n";
     }
     else { 
         cout << "NO\n";
