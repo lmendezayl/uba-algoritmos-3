@@ -18,7 +18,6 @@ int main(){
     // agrupo a los jugadores por carta favorita
     std::map<int, std::vector<int>> grupos_fav;
     for (int i=0; i<n; i++) grupos_fav[f[i]].push_back(i);
-    
     res = 0;
     
     // para cada grupo de jugadores
@@ -26,31 +25,20 @@ int main(){
         // hacemos kp
         int col = cant_cartas[fav]; // cantidad de cartas de numero fav
         int fil = jugadores.size(); // cantidad de jugadores con carta favorita fav
+        std::vector<std::vector<int>> kp(fil+1, std::vector<int>(col+1));
         
-        // definimos matriz dp[fil][col]
-        std::vector<std::vector<int>> kp(fil+1, std::vector<int>(col+1)); 
-        
-        // para cada jugador del grupo
-        for (int i=0; i<=fil; i++){
-            // para cada carta
-            for (int j=0; j<=col; j++){
-                // caso base: no darle nada al jugador i
-                kp[i][j] = kp[i-1][j]; // crea vector de ceros
-                // ahora probamos darle x cartas (si entra en la capacidad)
-                for (int x=1; x<=k && x<=j; x++) {
-                  kp[i][j] = std::max(kp[i][j], kp[i-1][j-x] + h[x]);
+        for (int i=0; i<=fil; i++) {
+            for (int j=0; j<=col; j++) {
+                if (i == 0) kp[i][j] = 0; // tem saudade sem jogadores
+                else {
+                    kp[i][j] = kp[i-1][j]; 
+                    for (int x=1; x<=k && x<=j; x++) {
+                        kp[i][j] = std::max(kp[i][j], kp[i-1][j-x] + h[x]);
+                    }
                 }
             }
         }
-        // sumamos kp del grupo 
         res += kp[fil][col];
-        
-        for (int i=0; i<=fil; i++){
-            for (int j=0; j<=col; j++){
-              std::cout << kp[i][j] << " ";
-            }
-        std::cout << std::endl;
-        }
     }    
     std::cout << res << std::endl;
     return 0;
