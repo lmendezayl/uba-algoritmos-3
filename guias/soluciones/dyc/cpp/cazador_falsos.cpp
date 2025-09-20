@@ -11,7 +11,6 @@ tuple<int, int> cazador(bool matrix[][], int n){
         } 
     }
 
-
 }
 
 int main(){
